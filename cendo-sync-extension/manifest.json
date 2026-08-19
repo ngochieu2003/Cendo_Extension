@@ -1,0 +1,19 @@
+{
+  "manifest_version": 3,
+  "name": "Cendo Sync — Để in → Private note",
+  "version": "1.0.0",
+  "description": "Đồng bộ ghi chú 'Để in' bên Pancake sang 'Private note' bên Cendo, dùng chính phiên đăng nhập sẵn có (không cần API key).",
+  "permissions": ["storage"],
+  "content_scripts": [
+    {
+      "matches": ["https://pos.pancake.vn/*"],
+      "js": ["pancake.js"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": ["https://cendo.work/*"],
+      "js": ["cendo.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}

@@ -1,0 +1,66 @@
+========================================================
+ CENDO BRIDGE — Xử lý & điền Mockup/Design ngay trên cendo.work
+ HƯỚNG DẪN CÀI ĐẶT (cho Chrome / Edge / Cốc Cốc)
+========================================================
+
+Extension thêm nút "⚡ Xử lý đơn Flip Photo Book" trên trang đơn cendo.work:
+bấm 1 nút → tự lấy ảnh khách trong Attachments → xử lý → cho xem/chỉnh →
+tự điền Mockup & Design vào đơn. Không cần mở web khác, không tải/upload tay.
+
+--------------------------------------------------------
+BƯỚC 1 — Giải nén
+--------------------------------------------------------
+- Giải nén file ZIP này ra một thư mục CỐ ĐỊNH (ví dụ: D:\CendoBridge).
+  ĐỪNG để trong thư mục tạm / Downloads dễ bị xoá — xoá là extension ngừng chạy.
+
+--------------------------------------------------------
+BƯỚC 2 — Cài vào trình duyệt
+--------------------------------------------------------
+1. Mở:  chrome://extensions
+   (Cốc Cốc:  coccoc://extensions   |  Edge:  edge://extensions)
+2. Bật "Chế độ dành cho nhà phát triển" / "Developer mode" (góc trên phải).
+3. Bấm "Tải tiện ích đã giải nén" / "Load unpacked".
+4. Chọn thư mục vừa giải nén (thư mục có file manifest.json).
+5. Nếu trình duyệt hỏi CẤP QUYỀN (có nhắc pancake.vn / cendo.work / cendoauto.art)
+   → chọn CHO PHÉP / Allow.
+6. Thấy thẻ "Cendo Bridge" là xong.
+
+--------------------------------------------------------
+BƯỚC 3 — Cách dùng
+--------------------------------------------------------
+1. Vào trang chi tiết một đơn trên cendo.work (đơn có 12 hoặc 16 ảnh Attachments).
+2. Bấm nút "⚡ Xử lý đơn Flip Photo Book" (góc dưới bên phải).
+3. Popup hiện lên, tự xử lý ảnh. Xem trước / chỉnh sửa nếu cần.
+4. Bấm "✓ Điền vào Mockup và Design" → ảnh tự vào ô Mockup & Design của đơn.
+
+--------------------------------------------------------
+LƯU Ý
+--------------------------------------------------------
+- Nếu popup hiện thông báo "Tắt tiện ích ở chế độ nhà phát triển" → chọn "Giữ lại".
+- Khi có bản cập nhật: thay thư mục cũ bằng thư mục mới, rồi vào chrome://extensions
+  bấm nút Tải lại (⟳) trên thẻ Cendo Bridge.
+
+
+--------------------------------------------------------
+MOI (v0.4.0) — BOT TU DONG 8H30 SANG
+--------------------------------------------------------
+Extension nay gio kem BOT: moi ngay 8h30 sang tu quet cac don
+"Hộp quay ảnh kỉ niệm - Flip Photo Book" co tag "Up đủ thông tin",
+don nao chua co Mockup/Design va co du 12/16 anh Attachments thi
+tu xu ly + dien vao don, xong bao cao vao nhom Lark.
+
+- Dieu kien: may BAT + Chrome DANG MO + da dang nhap cendo.work.
+  Neu 8h30 Chrome chua mo -> bot chay bu ngay khi ban mo Chrome
+  (moi ngay chi chay 1 lan).
+- Bam icon extension (goc phai Chrome) de: BAT/TAT lich, CHAY NGAY,
+  xem ket qua lan chay gan nhat.
+- Don khong co anh Attachments (chi co link Drive) -> bot BO QUA,
+  liet ke rieng trong tin Lark de nguoi lam tay.
+- Don co anh ghep / anh can designer -> bot VAN dien, nhung liet ke
+  vao muc "Can xem lai" trong tin Lark.
+
+CAP NHAT TU BAN CU: thay toan bo thu muc cu bang thu muc nay, vao
+chrome://extensions bam Tai lai (⟳). Neu trinh duyet hoi quyen moi
+(open.larksuite.com) -> chon CHO PHEP.
+
+Cần hỗ trợ: liên hệ người gửi extension này.

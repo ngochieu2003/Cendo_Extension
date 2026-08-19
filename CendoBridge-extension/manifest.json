@@ -1,0 +1,54 @@
+{
+  "manifest_version": 3,
+  "name": "Cendo Bridge — cendoauto.art ➜ cendo.work",
+  "version": "0.4.5",
+  "description": "Xu ly anh & dien Mockup/Design tu dong ngay tren cendo.work (nhung cendoauto.art). Kem bot 8h30 tu quet & lam don Flip Photo Book, bao cao Lark.",
+  "permissions": ["tabs", "scripting", "storage", "declarativeNetRequest", "alarms"],
+  "host_permissions": [
+    "*://cendoauto.art/*",
+    "*://*.cendoauto.art/*",
+    "*://cendo.work/*",
+    "*://*.cendo.work/*",
+    "*://content.pancake.vn/*",
+    "*://*.pancake.vn/*",
+    "*://drive.google.com/*",
+    "*://drive.usercontent.google.com/*",
+    "*://*.googleusercontent.com/*",
+    "*://open.larksuite.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Cendo Bridge — bot 8h30"
+  },
+  "declarative_net_request": {
+    "rule_resources": [
+      {
+        "id": "ruleset_iframe",
+        "enabled": true,
+        "path": "rules.json"
+      }
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://cendoauto.art/*", "*://*.cendoauto.art/*"],
+      "js": ["content-source.js"],
+      "run_at": "document_idle",
+      "all_frames": true
+    },
+    {
+      "matches": ["*://cendo.work/*", "*://*.cendo.work/*"],
+      "js": ["content-order.js", "content-target.js"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": ["*://cendo.work/*", "*://*.cendo.work/*"],
+      "js": ["inject.js"],
+      "run_at": "document_start",
+      "world": "MAIN"
+    }
+  ]
+}

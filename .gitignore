@@ -1,0 +1,14 @@
+# macOS / editor
+.DS_Store
+.vscode/
+*.swp
+
+# Gói zip đóng gói extension (tạo lại khi cần)
+*.zip
+
+# Chrome tự sinh khi load extension đóng gói
+_metadata/
+
+# Bí mật / dữ liệu cục bộ
+*.env
+secrets.*

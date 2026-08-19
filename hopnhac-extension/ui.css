@@ -1,0 +1,223 @@
+/* ===== Nút mở popup (đặt phía trên nút "Xử lý đơn Flip Photo Book") ===== */
+#hn-open-btn {
+  position: fixed;
+  right: 24px;
+  bottom: 128px;
+  z-index: 2147483645;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 18px;
+  border: none;
+  border-radius: 10px;
+  background: #7a4f2a;
+  color: #fff;
+  font: 700 14px system-ui, Arial, sans-serif;
+  cursor: pointer;
+  box-shadow: rgba(122, 79, 42, 0.45) 0 8px 24px;
+}
+#hn-open-btn:hover { background: #8a5c33; }
+
+/* ===== Nhãn MB + override + thumbnail ảnh (logic mới) ===== */
+.hn-mb { font-size: 14px; font-weight: 700; padding: 8px 10px; border-radius: 8px; margin-bottom: 8px; }
+.hn-mb.ok { background: #eef7ee; color: #2e7d32; border: 1px solid #cde8cd; }
+.hn-mb.err { background: #fdecea; color: #c0392b; border: 1px solid #f5c6c0; }
+#hn-seg-mb button { flex: 0 0 auto; padding: 6px 10px; font-size: 12px; }
+.hn-attach { display: flex; gap: 8px; flex-wrap: wrap; }
+.hn-thumb { width: 68px; height: 68px; object-fit: cover; border-radius: 8px; border: 2px solid #ddd; cursor: pointer; }
+.hn-thumb.sel { border-color: #2e7d32; box-shadow: 0 0 0 2px rgba(46,125,50,.25); }
+.hn-thumb:hover { border-color: #7a4f2a; }
+.hn-num { width: 90px; padding: 8px 10px; border: 2px solid #ddd; border-radius: 8px; font: 600 15px system-ui, Arial, sans-serif; text-align: center; }
+
+/* ===== Overlay + modal ===== */
+#hn-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2147483646;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.55);
+  font: 14px system-ui, Arial, sans-serif;
+}
+#hn-modal {
+  width: min(940px, 96vw);
+  max-height: 92vh;
+  overflow: auto;
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: rgba(0, 0, 0, 0.3) 0 20px 60px;
+  color: #222;
+}
+#hn-modal .hn-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid #eee;
+}
+#hn-modal .hn-head h2 { margin: 0; font-size: 17px; }
+#hn-modal .hn-close {
+  border: none; background: transparent; font-size: 22px; cursor: pointer; color: #888;
+}
+#hn-modal .hn-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  padding: 20px;
+}
+@media (max-width: 720px) { #hn-modal .hn-body { grid-template-columns: 1fr; } }
+
+.hn-field { margin-bottom: 16px; }
+.hn-field > label { display: block; font-weight: 700; margin-bottom: 8px; color: #333; }
+
+.hn-seg { display: flex; gap: 8px; flex-wrap: wrap; }
+.hn-seg button {
+  flex: 1 1 auto;
+  padding: 10px 12px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  background: #fafafa;
+  cursor: pointer;
+  font: 600 13px system-ui, Arial, sans-serif;
+  color: #444;
+}
+.hn-seg button.active { border-color: #7a4f2a; background: #f3e9df; color: #6a4322; }
+
+#hn-text {
+  width: 100%;
+  min-height: 96px;
+  padding: 10px 12px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  font: 15px system-ui, Arial, sans-serif;
+  resize: vertical;
+  box-sizing: border-box;
+}
+.hn-hint { font-size: 12px; color: #888; margin-top: 6px; }
+
+.hn-fmt { display: flex; gap: 14px; margin-top: 8px; flex-wrap: wrap; }
+.hn-fmt-grp { display: inline-flex; gap: 6px; }
+.hn-fmt button {
+  padding: 7px 11px; border: 1px solid #d9c6b3; border-radius: 7px; background: #faf5ef;
+  font: 600 13px system-ui, Arial, sans-serif; color: #6a4322; cursor: pointer;
+}
+.hn-fmt button:hover { background: #f2e7da; }
+.hn-fmt #hn-unitalic { color: #777; border-color: #ddd; background: #fafafa; }
+.hn-size-grp { align-items: center; }
+.hn-size-grp span { font-size: 13px; color: #555; font-weight: 600; }
+.hn-size-grp input[type="number"] {
+  width: 64px; padding: 6px 8px; border: 1px solid #ccc; border-radius: 7px;
+  font: 600 14px system-ui, Arial, sans-serif; color: #333; text-align: center;
+}
+
+.hn-previews { display: flex; flex-direction: column; gap: 14px; }
+.hn-pv { border: 1px solid #eee; border-radius: 10px; padding: 10px; background: #f8f8f8; }
+.hn-pv .hn-pv-title { font-weight: 700; font-size: 12px; color: #666; margin-bottom: 8px; }
+.hn-pv canvas { width: 100%; height: auto; display: block; border-radius: 6px; background: #fff; }
+/* Preview Design: nền tối chỉ để nhìn (CSS), file PNG xuất ra vẫn trong suốt */
+#hn-pv-design { background: #2a2e3a; }
+.hn-draggable { cursor: grab; touch-action: none; }
+.hn-draggable.hn-grabbing { cursor: grabbing; }
+.hn-draggable.hn-textmode { cursor: move; outline: 2px dashed #7a4f2a; outline-offset: -2px; }
+
+/* Chế độ kéo (ảnh / chữ) + ô X/Y chữ khắc */
+.hn-seg-mini { flex: 1; }
+.hn-seg-mini button { flex: 1 1 auto; padding: 5px 8px; font-size: 12px; }
+.hn-num-sm { width: 64px; padding: 5px 6px; font-size: 13px; }
+
+.hn-reframe { margin-top: 8px; }
+.hn-rf-hint { font-size: 11px; color: #999; }
+.hn-rf-row { display: flex; align-items: center; gap: 8px; margin-top: 6px; }
+.hn-rf-row span { font-size: 12px; color: #666; }
+.hn-rf-row input[type="range"] { flex: 1; }
+.hn-rf-row button {
+  padding: 5px 10px; border: 1px solid #ddd; border-radius: 6px; background: #fafafa;
+  font: 600 12px system-ui, Arial, sans-serif; color: #555; cursor: pointer;
+}
+.hn-rf-row button:hover { background: #f0f0f0; }
+
+.hn-actions {
+  grid-column: 1 / -1;
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  padding-top: 4px;
+  border-top: 1px solid #eee;
+  margin-top: 4px;
+  padding: 16px 0 0;
+  flex-wrap: wrap;
+}
+.hn-actions button {
+  padding: 12px 20px;
+  border-radius: 9px;
+  border: none;
+  font: 700 14px system-ui, Arial, sans-serif;
+  cursor: pointer;
+}
+.hn-btn-fill { background: #2e7d32; color: #fff; }
+.hn-btn-fill:hover { background: #276b2b; }
+.hn-btn-dl { background: #eef2f7; color: #333; }
+.hn-btn-dl:hover { background: #e2e8f0; }
+.hn-btn-fill:disabled, .hn-btn-dl:disabled { opacity: .5; cursor: not-allowed; }
+
+#hn-status { grid-column: 1 / -1; font-size: 13px; min-height: 18px; }
+#hn-status.err { color: #c0392b; }
+#hn-status.ok { color: #2e7d32; }
+#hn-status.info { color: #555; }
+
+/* ===== Thông báo nổi (khi popup đã đóng) ===== */
+#hn-toast {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2147483647;
+  max-width: 90vw;
+  padding: 12px 20px;
+  border-radius: 10px;
+  font: 600 14px system-ui, Arial, sans-serif;
+  color: #fff;
+  box-shadow: rgba(0, 0, 0, 0.25) 0 8px 24px;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+}
+#hn-toast.ok { background: #2e7d32; }
+#hn-toast.err { background: #c0392b; }
+#hn-toast.info { background: #444; }
+
+.hn-attach { display: flex; align-items: center; gap: 10px; }
+.hn-attach img { width: 56px; height: 56px; object-fit: cover; border-radius: 6px; border: 1px solid #ddd; }
+.hn-attach .hn-attach-txt { font-size: 12px; color: #666; }
+
+/* ===== Widget luồng tự động (góc trái dưới) ===== */
+#hn-auto-fab {
+  position: fixed; left: 20px; bottom: 76px; z-index: 2147483645;
+  padding: 10px 14px; border: none; border-radius: 10px;
+  background: #4a4a4a; color: #fff; font: 600 13px system-ui, Arial, sans-serif;
+  cursor: pointer; box-shadow: rgba(0,0,0,.3) 0 6px 18px; white-space: nowrap;
+}
+#hn-auto-fab.on { background: #2e7d32; box-shadow: rgba(46,125,50,.45) 0 6px 18px; }
+#hn-auto-fab:hover { filter: brightness(1.1); }
+#hn-auto-panel {
+  position: fixed; left: 20px; bottom: 124px; z-index: 2147483646;
+  width: 320px; background: #fff; border-radius: 12px; padding: 14px 16px;
+  box-shadow: rgba(0,0,0,.28) 0 14px 40px; color: #222; font: 13px system-ui, Arial, sans-serif;
+}
+#hn-auto-panel .hn-ap-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; font-size: 14px; }
+#hn-auto-panel .hn-ap-close { border: none; background: transparent; font-size: 20px; cursor: pointer; color: #888; line-height: 1; }
+#hn-auto-panel .hn-ap-switch { display: flex; align-items: center; gap: 8px; font-weight: 700; margin-bottom: 10px; cursor: pointer; }
+#hn-auto-panel .hn-ap-switch input { width: 18px; height: 18px; }
+#hn-auto-panel .hn-ap-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+#hn-auto-panel .hn-ap-row > span { width: 62px; font-weight: 600; color: #444; }
+#hn-auto-panel input[type=time], #hn-auto-panel select { flex: 1; padding: 6px 8px; border: 2px solid #ddd; border-radius: 8px; font: 13px system-ui, Arial, sans-serif; background: #fff; color: #222; }
+#hn-auto-panel .hn-ap-hint { font-size: 11px; color: #777; margin: 4px 0 10px; }
+#hn-auto-panel .hn-ap-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+#hn-auto-panel .hn-ap-actions button { padding: 8px 12px; border: none; border-radius: 8px; font: 700 12px system-ui, Arial, sans-serif; cursor: pointer; }
+#hn-auto-panel .hn-ap-save { background: #7a4f2a; color: #fff; }
+#hn-auto-panel .hn-ap-run { background: #2e7d32; color: #fff; }
+#hn-auto-panel .hn-ap-run:disabled { opacity: .5; cursor: not-allowed; }
+#hn-auto-panel .hn-ap-more { background: #eef2f7; color: #333; }
+#hn-auto-panel .hn-ap-status { margin-top: 10px; font-size: 12px; padding: 8px 10px; border-radius: 8px; background: #f3f3f3; color: #555; white-space: pre-wrap; }
+#hn-auto-panel .hn-ap-status.ok { background: #eef7ee; color: #2e7d32; }
+#hn-auto-panel .hn-ap-status.err { background: #fdecea; color: #c0392b; }
