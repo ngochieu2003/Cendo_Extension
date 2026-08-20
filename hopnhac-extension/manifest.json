@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Hộp Nhạc - Tạo Mockup & Design",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Tạo Mockup + Design cho đơn Hộp Nhạc trên cendo.work: chọn font/màu, nhập chữ, ghép ảnh khách, tự điền vào ô Upload. Có luồng tự động chạy theo lịch + báo Lark.",
   "icons": {
     "128": "assets/icon128.png"

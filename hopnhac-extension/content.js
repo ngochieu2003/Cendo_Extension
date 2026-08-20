@@ -152,9 +152,22 @@
 
   /* ============================ LAYOUTS ============================ */
   const SQ = 820;
+  const FIT_W = SQ * 0.96; // chữ dài tự thu nhỏ để không tràn/cắt mép ô khắc
+  function fitSize(ctx, text, fam, sz, maxW) {
+    ctx.font = `${sz}px "${fam}"`;
+    const met = ctx.measureText(text);
+    // dùng actualBoundingBox nếu có (font nghiêng/script tràn hơn met.width)
+    const w = (met.actualBoundingBoxLeft != null && met.actualBoundingBoxRight != null)
+      ? Math.max(met.width, met.actualBoundingBoxLeft + met.actualBoundingBoxRight) : met.width;
+    return w > maxW ? Math.max(10, Math.floor(sz * maxW / w)) : sz;
+  }
   function centeredLines(ctx, lines, cy) {
     lines = lines.filter((l) => l.t && String(l.t).trim());
-    let total = 0; const m = lines.map((l) => { const lh = l.sz * 1.15; total += lh; return { ...l, lh }; });
+    const m = lines.map((l) => {
+      const sz = fitSize(ctx, l.t, l.fam, l.sz, FIT_W);
+      return { ...l, sz, lh: sz * 1.15 };
+    });
+    let total = 0; m.forEach((l) => { total += l.lh; });
     let y = cy - total / 2;
     ctx.textAlign = "center"; ctx.textBaseline = "middle";
     for (const l of m) { ctx.font = `${l.sz}px "${l.fam}"`; ctx.fillText(l.t, SQ / 2, y + l.lh / 2); y += l.lh; }
@@ -296,7 +309,7 @@
   const TEXT_OFF_MAX = 250; // giới hạn dịch chữ (px)
   const textOff = () => ({ dx: state.textDX, dy: state.textDY });
   const SIZE_BASE = 25; // cỡ chữ mặc định (scale = fontSize / SIZE_BASE)
-  const MB_SIZE = { MB01: 30, MB02: 30, MB03: 30, MB05: 30 }; // cỡ mặc định riêng theo kiểu MB (MB04 dùng 25)
+  const MB_SIZE = { MB05: 30 }; // cỡ mặc định riêng theo kiểu MB (còn lại dùng SIZE_BASE = 25)
   const defaultSize = (code) => MB_SIZE[code] || SIZE_BASE;
   const rf = () => ({ scale: state.scale, offX: state.offX, offY: state.offY });
   const curPhoto = () => (state.attachs && state.photoIdx != null ? state.attachs[state.photoIdx].bm : null);
@@ -318,7 +331,7 @@
             <div class="hn-field"><label>Nội dung (dòng 1: lời chúc · dòng 2: tên · dòng 3: ngày)</label>
               <textarea id="hn-text" placeholder="Happy Birthday&#10;Ngọc Hà&#10;23/09/1999"></textarea>
             </div>
-            <div class="hn-field"><label>Cỡ chữ khắc (mặc định 30 · MB04: 25)</label>
+            <div class="hn-field"><label>Cỡ chữ khắc (mặc định 25 · MB05: 30)</label>
               <input type="number" id="hn-size" class="hn-num" min="10" max="60" step="1" value="25">
             </div>
             <div class="hn-field"><label>Ảnh khách (chọn ảnh để ghép)</label><div class="hn-attach" id="hn-attach"></div></div>
