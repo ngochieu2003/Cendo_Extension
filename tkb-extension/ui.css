@@ -1,0 +1,183 @@
+/* ===== Nút mở popup (đặt phía trên nút của extension Hộp Nhạc) ===== */
+#tkb-open-btn {
+  position: fixed;
+  right: 24px;
+  bottom: 186px;
+  z-index: 2147483645;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 18px;
+  border: none;
+  border-radius: 10px;
+  background: #1240c2;
+  color: #fff;
+  font: 700 14px system-ui, Arial, sans-serif;
+  cursor: pointer;
+  box-shadow: rgba(18, 64, 194, 0.45) 0 8px 24px;
+}
+#tkb-open-btn:hover { background: #1a4ee0; }
+
+/* ===== Overlay + modal ===== */
+#tkb-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2147483646;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.55);
+  font: 14px system-ui, Arial, sans-serif;
+}
+#tkb-modal {
+  width: min(940px, 96vw);
+  max-height: 92vh;
+  overflow: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #b9c4e6 #f0f2f7;
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: rgba(0, 0, 0, 0.3) 0 20px 60px;
+  color: #222;
+}
+#tkb-modal .tkb-head {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 16px 20px; border-bottom: 1px solid #eee;
+}
+#tkb-modal .tkb-head h2 { margin: 0; font-size: 17px; }
+#tkb-modal .tkb-close { border: none; background: transparent; font-size: 22px; cursor: pointer; color: #888; }
+#tkb-modal .tkb-body { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; padding: 20px; }
+@media (max-width: 720px) { #tkb-modal .tkb-body { grid-template-columns: 1fr; } }
+
+.tkb-field { margin-bottom: 16px; }
+.tkb-field > label { display: block; font-weight: 700; margin-bottom: 8px; color: #333; }
+.tkb-hint { font-size: 12px; color: #888; margin-top: 6px; }
+
+.tkb-warn {
+  background: #fdecea; color: #c0392b; border: 1px solid #f5c6c0;
+  border-radius: 8px; padding: 8px 10px; font-size: 12.5px; font-weight: 600; margin-bottom: 14px; line-height: 1.5;
+}
+
+/* ===== Danh sách item trong đơn ===== */
+.tkb-items {
+  display: flex; flex-direction: column; gap: 8px;
+  max-height: 340px; overflow-y: scroll; /* luôn hiện thanh cuộn khi nhiều item */
+  padding-right: 6px;
+  scrollbar-width: thin;                 /* Firefox */
+  scrollbar-color: #b9c4e6 #f0f2f7;
+}
+/* Thanh cuộn thấy rõ (Chrome/Edge/Cốc Cốc) */
+.tkb-items::-webkit-scrollbar { width: 10px; }
+.tkb-items::-webkit-scrollbar-track { background: #f0f2f7; border-radius: 8px; }
+.tkb-items::-webkit-scrollbar-thumb { background: #b9c4e6; border-radius: 8px; border: 2px solid #f0f2f7; }
+.tkb-items::-webkit-scrollbar-thumb:hover { background: #8fa2d9; }
+#tkb-modal::-webkit-scrollbar { width: 10px; }
+#tkb-modal::-webkit-scrollbar-track { background: #f0f2f7; }
+#tkb-modal::-webkit-scrollbar-thumb { background: #b9c4e6; border-radius: 8px; border: 2px solid #f0f2f7; }
+#tkb-modal::-webkit-scrollbar-thumb:hover { background: #8fa2d9; }
+.tkb-item {
+  border: 2px solid #e4e4e4; border-radius: 10px; padding: 8px 10px; background: #fafafa; cursor: pointer;
+}
+.tkb-item.sel { border-color: #1240c2; background: #f2f5ff; }
+.tkb-item.empty { border-style: dashed; }
+.tkb-item-head { display: flex; align-items: center; gap: 8px; font-size: 12px; margin-bottom: 6px; flex-wrap: wrap; }
+.tkb-item-head b { font-size: 13px; }
+.tkb-item-tk { font-weight: 700; }
+.tkb-item-tk.ok { color: #2e7d32; }
+.tkb-item-tk.err { color: #c0392b; }
+.tkb-item-sku { color: #999; margin-left: auto; font-size: 11px; }
+.tkb-item-row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.tkb-item-name {
+  flex: 1 1 160px; min-width: 140px; padding: 7px 10px; border: 2px solid #ddd; border-radius: 8px;
+  font: 600 14px system-ui, Arial, sans-serif; box-sizing: border-box;
+}
+.tkb-item-seg { flex: 0 0 auto; }
+.tkb-item-seg button { padding: 5px 8px; font-size: 11px; flex: 0 0 auto; }
+
+.tkb-seg { display: flex; gap: 8px; flex-wrap: wrap; }
+.tkb-seg button {
+  flex: 1 1 auto; padding: 10px 12px; border: 2px solid #ddd; border-radius: 8px;
+  background: #fafafa; cursor: pointer; font: 600 13px system-ui, Arial, sans-serif; color: #444;
+}
+.tkb-seg button.active { border-color: #1240c2; background: #e8eeff; color: #12309a; }
+
+#tkb-name {
+  width: 100%; padding: 10px 12px; border: 2px solid #ddd; border-radius: 8px;
+  font: 15px system-ui, Arial, sans-serif; box-sizing: border-box;
+}
+.tkb-num { width: 90px; padding: 8px 10px; border: 2px solid #ddd; border-radius: 8px; font: 600 15px system-ui, Arial, sans-serif; text-align: center; }
+.tkb-num-sm { width: 70px; padding: 6px 8px; font-size: 13px; }
+.tkb-rf-row { display: flex; align-items: center; gap: 8px; }
+.tkb-rf-row span { font-size: 12px; color: #666; font-weight: 600; }
+.tkb-rf-row button {
+  padding: 6px 10px; border: 1px solid #ddd; border-radius: 6px; background: #fafafa;
+  font: 600 12px system-ui, Arial, sans-serif; color: #555; cursor: pointer;
+}
+.tkb-rf-row button:hover { background: #f0f0f0; }
+
+.tkb-previews { display: flex; flex-direction: column; gap: 14px; }
+.tkb-pv { border: 1px solid #eee; border-radius: 10px; padding: 10px; background: #f8f8f8; }
+.tkb-pv .tkb-pv-title { font-weight: 700; font-size: 12px; color: #666; margin-bottom: 8px; }
+.tkb-pv canvas { width: 100%; height: auto; display: block; border-radius: 6px; background: #fff; }
+#tkb-pv-design { border: 1px solid #e2e2e2; }
+.tkb-draggable { cursor: grab; touch-action: none; }
+.tkb-draggable.tkb-grabbing { cursor: grabbing; }
+
+.tkb-actions {
+  grid-column: 1 / -1; display: flex; gap: 12px; justify-content: flex-end;
+  border-top: 1px solid #eee; margin-top: 4px; padding: 16px 0 0; flex-wrap: wrap;
+}
+.tkb-actions button { padding: 12px 20px; border-radius: 9px; border: none; font: 700 14px system-ui, Arial, sans-serif; cursor: pointer; }
+.tkb-btn-fill { background: #2e7d32; color: #fff; }
+.tkb-btn-fill:hover { background: #276b2b; }
+.tkb-btn-dl { background: #eef2f7; color: #333; }
+.tkb-btn-dl:hover { background: #e2e8f0; }
+.tkb-btn-fill:disabled, .tkb-btn-dl:disabled { opacity: .5; cursor: not-allowed; }
+
+#tkb-status { grid-column: 1 / -1; font-size: 13px; min-height: 18px; }
+#tkb-status.err { color: #c0392b; }
+#tkb-status.ok { color: #2e7d32; }
+#tkb-status.info { color: #555; }
+
+/* ===== Thông báo nổi ===== */
+#tkb-toast {
+  position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
+  z-index: 2147483647; max-width: 90vw; padding: 12px 20px; border-radius: 10px;
+  font: 600 14px system-ui, Arial, sans-serif; color: #fff;
+  box-shadow: rgba(0, 0, 0, 0.25) 0 8px 24px; transition: opacity 0.35s ease; pointer-events: none;
+}
+#tkb-toast.ok { background: #2e7d32; }
+#tkb-toast.err { background: #c0392b; }
+#tkb-toast.info { background: #444; }
+
+/* ===== Widget luồng tự động (góc trái dưới) ===== */
+#tkb-auto-fab {
+  position: fixed; left: 20px; bottom: 130px; z-index: 2147483645;
+  padding: 10px 14px; border: none; border-radius: 10px;
+  background: #4a4a4a; color: #fff; font: 600 13px system-ui, Arial, sans-serif;
+  cursor: pointer; box-shadow: rgba(0,0,0,.3) 0 6px 18px; white-space: nowrap;
+}
+#tkb-auto-fab.on { background: #1240c2; box-shadow: rgba(18,64,194,.45) 0 6px 18px; }
+#tkb-auto-fab:hover { filter: brightness(1.1); }
+#tkb-auto-panel {
+  position: fixed; left: 20px; bottom: 178px; z-index: 2147483646;
+  width: 320px; background: #fff; border-radius: 12px; padding: 14px 16px;
+  box-shadow: rgba(0,0,0,.28) 0 14px 40px; color: #222; font: 13px system-ui, Arial, sans-serif;
+}
+#tkb-auto-panel .tkb-ap-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; font-size: 14px; }
+#tkb-auto-panel .tkb-ap-close { border: none; background: transparent; font-size: 20px; cursor: pointer; color: #888; line-height: 1; }
+#tkb-auto-panel .tkb-ap-switch { display: flex; align-items: center; gap: 8px; font-weight: 700; margin-bottom: 10px; cursor: pointer; }
+#tkb-auto-panel .tkb-ap-switch input { width: 18px; height: 18px; }
+#tkb-auto-panel .tkb-ap-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+#tkb-auto-panel .tkb-ap-row > span { width: 62px; font-weight: 600; color: #444; }
+#tkb-auto-panel input[type=time], #tkb-auto-panel select { flex: 1; padding: 6px 8px; border: 2px solid #ddd; border-radius: 8px; font: 13px system-ui, Arial, sans-serif; background: #fff; color: #222; }
+#tkb-auto-panel .tkb-ap-hint { font-size: 11px; color: #777; margin: 4px 0 10px; }
+#tkb-auto-panel .tkb-ap-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+#tkb-auto-panel .tkb-ap-actions button { padding: 8px 12px; border: none; border-radius: 8px; font: 700 12px system-ui, Arial, sans-serif; cursor: pointer; }
+#tkb-auto-panel .tkb-ap-save { background: #1240c2; color: #fff; }
+#tkb-auto-panel .tkb-ap-run { background: #2e7d32; color: #fff; }
+#tkb-auto-panel .tkb-ap-run:disabled { opacity: .5; cursor: not-allowed; }
+#tkb-auto-panel .tkb-ap-more { background: #eef2f7; color: #333; }
+#tkb-auto-panel .tkb-ap-status { margin-top: 10px; font-size: 12px; padding: 8px 10px; border-radius: 8px; background: #f3f3f3; color: #555; white-space: pre-wrap; }
+#tkb-auto-panel .tkb-ap-status.ok { background: #eef7ee; color: #2e7d32; }
+#tkb-auto-panel .tkb-ap-status.err { background: #fdecea; color: #c0392b; }

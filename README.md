@@ -5,6 +5,7 @@ Mỗi thư mục con là một extension độc lập, cài kiểu **Load unpack
 
 | Thư mục | Tên | Chức năng chính |
 |---|---|---|
+| [`tkb-extension/`](tkb-extension/) | 🗓 Thời Khoá Biểu 3D – Tạo Mockup & Design | Quét các item Thời khoá biểu trong đơn (nhiều item/đơn), lấy tên khách theo từng dòng External note, chọn mẫu bảng theo mục "Thiết kế" (Cơ Bản / Thỏ Hồng / Vũ Trụ), ghép Mockup + Design 1254×1254 (chữ Lobster có viền / Arial Bold nền trắng) rồi tự điền vào ô Upload từng item. Có **luồng tự động chạy theo lịch** (chỉ làm đơn "Up đủ thông tin" chưa có ảnh) và báo kết quả về group Lark (đã làm / lỗi / cần xem). |
 | [`hopnhac-extension/`](hopnhac-extension/) | 🎵 Hộp Nhạc – Tạo Mockup & Design | Tự nhận mã MB01–MB05 từ đơn, ghép ảnh khách + chữ khắc thành Mockup 1000×1000 và Design 1500×2492 (PNG nền trong suốt), điền vào ô Upload. Có **luồng tự động chạy theo lịch** (quét đơn "Up đủ thông tin", chỉ làm đơn Hộp Nhạc chưa có ảnh) và báo kết quả về group Lark. |
 | [`CendoBridge-extension/`](CendoBridge-extension/) | Cendo Bridge — cendoauto.art ➜ cendo.work | Gửi thẳng ảnh kết quả từ cendoauto.art sang ô Upload Mockup/Design trên cendo.work; kèm bot 8h30 tự quét & làm đơn Flip Photo Book, báo Lark. |
 | [`cendo-sync-extension/`](cendo-sync-extension/) | Cendo Sync — "Để in" → "Private note" | Đồng bộ ghi chú "Để in" bên Pancake POS sang "Private note" bên Cendo, dùng phiên đăng nhập sẵn có. |
