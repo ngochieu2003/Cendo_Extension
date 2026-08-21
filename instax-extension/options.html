@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<title>Móc Khóa Clicky Instax 3D – Luồng tự động</title>
+<style>
+  body { font: 14px system-ui, Arial, sans-serif; color: #222; background: #fdf6ee; margin: 0; }
+  .wrap { max-width: 760px; margin: 28px auto; padding: 0 16px; }
+  h1 { font-size: 20px; margin: 0 0 4px; }
+  .sub { color: #666; margin-bottom: 18px; }
+  .card { background: #fff; border-radius: 12px; padding: 18px 20px; box-shadow: rgba(0,0,0,.06) 0 4px 16px; margin-bottom: 16px; }
+  .card h2 { font-size: 15px; margin: 0 0 12px; }
+  .row { display: flex; gap: 14px; flex-wrap: wrap; align-items: flex-end; margin-bottom: 12px; }
+  label { display: block; font-weight: 600; font-size: 12px; color: #444; margin-bottom: 5px; }
+  input[type=text], input[type=number], input[type=time], select { padding: 8px 10px; border: 2px solid #ddd; border-radius: 8px; font: 14px system-ui; }
+  input[type=text] { width: 100%; box-sizing: border-box; }
+  .switch { display: flex; align-items: center; gap: 8px; font-weight: 700; }
+  .switch input { width: 20px; height: 20px; }
+  button { padding: 9px 16px; border: none; border-radius: 8px; font: 700 13px system-ui; cursor: pointer; background: #e2711d; color: #fff; }
+  button.sec { background: #f4ece2; color: #333; }
+  button.run { background: #2e7d32; }
+  button:disabled { opacity: .5; cursor: not-allowed; }
+  .hint { font-size: 12px; color: #777; margin-top: 4px; }
+  #status { font-size: 13px; padding: 10px 12px; border-radius: 8px; background: #f3f3f3; min-height: 18px; white-space: pre-wrap; }
+  #status.ok { background: #eef7ee; color: #2e7d32; } #status.err { background: #fdecea; color: #c0392b; }
+  .log { border-top: 1px solid #eee; padding: 10px 0; font-size: 13px; }
+  .log b { color: #333; } .log pre { white-space: pre-wrap; background: #fafafa; border-radius: 6px; padding: 8px; font-size: 12px; margin: 6px 0 0; max-height: 200px; overflow: auto; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>📸 Móc Khóa Clicky Instax 3D – Luồng tự động làm Mockup &amp; Design</h1>
+  <div class="sub">Quét đơn có tag <b>“Up đủ thông tin”</b>, chỉ làm item <b>Móc Khóa Clicky Instax</b> mà <b>Mockup và Design đều trống</b>. Ảnh khách lấy từ <b>Attachments</b> (ảnh thứ n → item thứ n, lệch số lượng thì bỏ qua và báo Lark), mẫu mockup lấy theo mục <b>Màu</b>. Đơn khác không bị đụng tới.</div>
+
+  <div class="card">
+    <h2>Lịch chạy</h2>
+    <div class="row">
+      <div class="switch"><input type="checkbox" id="enabled"><span>Bật chạy tự động hằng ngày</span></div>
+    </div>
+    <div class="row">
+      <div><label>Giờ chạy (giờ máy tính – Việt Nam)</label><input type="time" id="time" value="08:00"></div>
+      <div><label>Quy mô mỗi lần chạy</label>
+        <select id="pages">
+          <option value="1">1 trang đầu (20 đơn)</option>
+          <option value="2">2 trang đầu (40 đơn)</option>
+          <option value="3">3 trang đầu (60 đơn)</option>
+          <option value="5">5 trang đầu (100 đơn)</option>
+          <option value="10">10 trang đầu (200 đơn)</option>
+          <option value="0">Tất cả các đơn chưa làm</option>
+        </select></div>
+      <div><button id="save">Lưu cài đặt</button></div>
+    </div>
+    <div class="hint">Chrome phải đang mở (có thể thu nhỏ) và đã đăng nhập cendo.work vào giờ chạy; extension sẽ tự mở tab cendo.work nếu chưa có.</div>
+    <div class="hint" id="next"></div>
+  </div>
+
+  <div class="card">
+    <h2>Thông báo Lark</h2>
+    <div class="row" style="align-items:flex-end">
+      <div style="flex:1"><label>Webhook</label><input type="text" id="webhook" placeholder="https://open.larksuite.com/open-apis/bot/v2/hook/..."></div>
+      <div><label>Keyword</label><input type="text" id="keyword" style="width:140px"></div>
+      <div><button class="sec" id="testLark">Gửi tin thử</button></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Chạy ngay</h2>
+    <div class="row">
+      <button class="run" id="runNow">▶ Chạy ngay theo quy mô đã chọn</button>
+    </div>
+    <div id="status">Sẵn sàng.</div>
+  </div>
+
+  <div class="card">
+    <h2>Lịch sử chạy (20 lần gần nhất)</h2>
+    <div id="logs"></div>
+  </div>
+</div>
+<script src="options.js"></script>
+</body>
+</html>

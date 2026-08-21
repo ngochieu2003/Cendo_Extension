@@ -1,0 +1,43 @@
+{
+  "manifest_version": 3,
+  "name": "Móc Khóa Clicky Instax 3D - Tạo Mockup & Design",
+  "version": "1.0.0",
+  "description": "Tạo Mockup + Design cho đơn Móc Khóa Clicky Instax 3D Cá Nhân Hóa trên cendo.work: lấy ảnh từ Attachments (ảnh thứ n → item thứ n), chọn mẫu mockup theo Màu của item, tự điền vào ô Upload. Có luồng tự động theo lịch + báo Lark.",
+  "icons": {
+    "128": "assets/icon128.png"
+  },
+  "permissions": ["alarms", "storage", "tabs"],
+  "host_permissions": [
+    "https://cendo.work/*",
+    "https://content.pancake.vn/*",
+    "https://open.larksuite.com/*"
+  ],
+  "background": { "service_worker": "bg.js" },
+  "options_page": "options.html",
+  "action": { "default_title": "Móc Khóa Clicky Instax 3D – Cài đặt luồng tự động" },
+  "content_scripts": [
+    {
+      "matches": ["https://cendo.work/*"],
+      "js": ["injected.js"],
+      "run_at": "document_start",
+      "world": "MAIN"
+    },
+    {
+      "matches": ["https://cendo.work/*"],
+      "js": ["content.js", "auto.js"],
+      "css": ["ui.css"],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "assets/MOCKUP_INSTAX_BLUE.png",
+        "assets/MOCKUP_INSTAX_GREEN.png",
+        "assets/MOCKUP_INSTAX_PINK.png",
+        "assets/MOCKUP_INSTAX_ORANGE.png"
+      ],
+      "matches": ["https://cendo.work/*"]
+    }
+  ]
+}
