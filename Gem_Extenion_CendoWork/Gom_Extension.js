@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Extension Hub - Gom nút nổi vào 1 box (Cendo)
 // @namespace    https://local.hub
-// @version      3.2
+// @version      3.3
 // @description  Gom các nút nổi của extension ở góc dưới phải/trái Cendo vào 1 box thu gọn, chia nhóm theo từng extension.
 // @match        *://cendo.work/*
 // @match        *://*.cendo.work/*
@@ -31,6 +31,28 @@
         'hn-auto-fab',      // 🎵 Auto Hộp Nhạc: TẮT
       ],
     },
+    // Nhóm móc khoá 3D — xếp theo đúng thứ tự nút nổi trên màn hình (từ trên xuống)
+    {
+      title: 'Pickleball',
+      ids: [
+        'pickle-open-btn',  // 🥒 Tạo Mockup Pickleball
+        'pickle-auto-fab',  // 🥒 Auto Pickleball: TẮT
+      ],
+    },
+    {
+      title: 'Tennis',
+      ids: [
+        'tennis-open-btn',  // 🎾 Tạo Mockup Tennis
+        'tennis-auto-fab',  // 🎾 Auto Tennis: TẮT
+      ],
+    },
+    {
+      title: 'Chú Cừu 3D',
+      ids: [
+        'cuu-open-btn',     // 🐑 Tạo Mockup Móc Khoá Clicky Chú Cừu
+        'cuu-auto-fab',     // 🐑 Auto Cừu: TẮT
+      ],
+    },
     {
       title: 'Cầu Lông',
       ids: [
@@ -43,13 +65,6 @@
       ids: [
         'instax-open-btn',  // 📷 Tạo Mockup Instax
         'instax-auto-fab',  // 📷 Auto Instax: TẮT
-      ],
-    },
-    {
-      title: 'Chú Cừu 3D',
-      ids: [
-        'cuu-open-btn',     // 🐑 Tạo Mockup Móc Khoá Clicky Chú Cừu
-        'cuu-auto-fab',     // 🐑 Auto Cừu: TẮT
       ],
     },
     {
