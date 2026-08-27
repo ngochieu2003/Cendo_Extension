@@ -1,0 +1,190 @@
+/* ===== Nút mở popup (bottom 410 — trên Cừu 354 · Cầu lông 298 · Instax 242 · TKB 186) ===== */
+#pickle-open-btn {
+  position: fixed;
+  right: 24px;
+  bottom: 466px;
+  z-index: 2147483645;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 18px;
+  border: none;
+  border-radius: 10px;
+  background: #d01a2c;
+  color: #fff;
+  font: 700 14px system-ui, Arial, sans-serif;
+  cursor: pointer;
+  box-shadow: rgba(208, 26, 44, 0.45) 0 8px 24px;
+}
+#pickle-open-btn:hover { background: #e63946; }
+
+/* ===== Overlay + modal ===== */
+#pickle-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2147483646;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.55);
+  font: 14px system-ui, Arial, sans-serif;
+}
+#pickle-modal {
+  width: min(940px, 96vw);
+  max-height: 92vh;
+  overflow: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #b9c4e6 #f0f2f7;
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: rgba(0, 0, 0, 0.3) 0 20px 60px;
+  color: #222;
+}
+#pickle-modal .pickle-head {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 16px 20px; border-bottom: 1px solid #eee;
+}
+#pickle-modal .pickle-head h2 { margin: 0; font-size: 17px; }
+#pickle-modal .pickle-close { border: none; background: transparent; font-size: 22px; cursor: pointer; color: #888; }
+#pickle-modal .pickle-body { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; padding: 20px; }
+@media (max-width: 720px) { #pickle-modal .pickle-body { grid-template-columns: 1fr; } }
+
+.pickle-field { margin-bottom: 16px; }
+.pickle-field > label { display: block; font-weight: 700; margin-bottom: 8px; color: #333; }
+.pickle-hint { font-size: 12px; color: #888; margin-top: 6px; }
+
+.pickle-warn {
+  background: #fdecea; color: #c0392b; border: 1px solid #f5c6c0;
+  border-radius: 8px; padding: 8px 10px; font-size: 12.5px; font-weight: 600; margin-bottom: 14px; line-height: 1.5;
+}
+
+/* ===== Danh sách item trong đơn ===== */
+.pickle-items {
+  display: flex; flex-direction: column; gap: 8px;
+  max-height: 340px; overflow-y: scroll; /* luôn hiện thanh cuộn khi nhiều item */
+  padding-right: 6px;
+  scrollbar-width: thin;                 /* Firefox */
+  scrollbar-color: #b9c4e6 #f0f2f7;
+}
+/* Thanh cuộn thấy rõ (Chrome/Edge/Cốc Cốc) */
+.pickle-items::-webkit-scrollbar { width: 10px; }
+.pickle-items::-webkit-scrollbar-track { background: #f0f2f7; border-radius: 8px; }
+.pickle-items::-webkit-scrollbar-thumb { background: #b9c4e6; border-radius: 8px; border: 2px solid #f0f2f7; }
+.pickle-items::-webkit-scrollbar-thumb:hover { background: #8fa2d9; }
+#pickle-modal::-webkit-scrollbar { width: 10px; }
+#pickle-modal::-webkit-scrollbar-track { background: #f0f2f7; }
+#pickle-modal::-webkit-scrollbar-thumb { background: #b9c4e6; border-radius: 8px; border: 2px solid #f0f2f7; }
+#pickle-modal::-webkit-scrollbar-thumb:hover { background: #8fa2d9; }
+.pickle-item {
+  border: 2px solid #e4e4e4; border-radius: 10px; padding: 8px 10px; background: #fafafa; cursor: pointer;
+}
+.pickle-item.sel { border-color: #d01a2c; background: #fff2f3; }
+.pickle-item.empty { border-style: dashed; }
+.pickle-item-head { display: flex; align-items: center; gap: 8px; font-size: 12px; margin-bottom: 6px; flex-wrap: wrap; }
+.pickle-item-head b { font-size: 13px; }
+.pickle-item-tk { font-weight: 700; }
+.pickle-item-tk.ok { color: #2e7d32; }
+.pickle-item-tk.err { color: #c0392b; }
+.pickle-item-sku { color: #999; margin-left: auto; font-size: 11px; }
+.pickle-item-row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.pickle-item-name {
+  flex: 1 1 160px; min-width: 140px; padding: 7px 10px; border: 2px solid #ddd; border-radius: 8px;
+  font: 600 14px system-ui, Arial, sans-serif; box-sizing: border-box;
+}
+.pickle-item-seg { flex: 0 0 auto; }
+.pickle-item-seg button { padding: 5px 8px; font-size: 11px; flex: 0 0 auto; }
+
+.pickle-seg { display: flex; gap: 8px; flex-wrap: wrap; }
+.pickle-seg button {
+  flex: 1 1 auto; padding: 10px 12px; border: 2px solid #ddd; border-radius: 8px;
+  background: #fafafa; cursor: pointer; font: 600 13px system-ui, Arial, sans-serif; color: #444;
+}
+.pickle-seg button.active { border-color: #d01a2c; background: #ffe8ea; color: #a01523; }
+
+#pickle-name {
+  width: 100%; padding: 10px 12px; border: 2px solid #ddd; border-radius: 8px;
+  font: 15px system-ui, Arial, sans-serif; box-sizing: border-box;
+}
+.pickle-num { width: 90px; padding: 8px 10px; border: 2px solid #ddd; border-radius: 8px; font: 600 15px system-ui, Arial, sans-serif; text-align: center; }
+.pickle-num-sm { width: 70px; padding: 6px 8px; font-size: 13px; }
+.pickle-rf-row { display: flex; align-items: center; gap: 8px; }
+.pickle-rf-row span { font-size: 12px; color: #666; font-weight: 600; }
+.pickle-rf-row button {
+  padding: 6px 10px; border: 1px solid #ddd; border-radius: 6px; background: #fafafa;
+  font: 600 12px system-ui, Arial, sans-serif; color: #555; cursor: pointer;
+}
+.pickle-rf-row button:hover { background: #f0f0f0; }
+
+.pickle-previews { display: flex; flex-direction: column; gap: 14px; }
+.pickle-pv { border: 1px solid #eee; border-radius: 10px; padding: 10px; background: #f8f8f8; }
+.pickle-pv .pickle-pv-title { font-weight: 700; font-size: 12px; color: #666; margin-bottom: 8px; }
+.pickle-pv canvas { width: 100%; height: auto; display: block; border-radius: 6px; background: #fff; }
+#pickle-pv-design { border: 1px solid #e2e2e2; }
+.pickle-draggable { cursor: grab; touch-action: none; }
+.pickle-draggable.pickle-grabbing { cursor: grabbing; }
+
+.pickle-actions {
+  grid-column: 1 / -1; display: flex; gap: 12px; justify-content: flex-end;
+  border-top: 1px solid #eee; margin-top: 4px; padding: 16px 0 0; flex-wrap: wrap;
+}
+.pickle-actions button { padding: 12px 20px; border-radius: 9px; border: none; font: 700 14px system-ui, Arial, sans-serif; cursor: pointer; }
+.pickle-btn-fill { background: #2e7d32; color: #fff; }
+.pickle-btn-fill:hover { background: #276b2b; }
+.pickle-btn-dl { background: #eef2f7; color: #333; }
+.pickle-btn-dl:hover { background: #e2e8f0; }
+.pickle-btn-fill:disabled, .pickle-btn-dl:disabled { opacity: .5; cursor: not-allowed; }
+
+#pickle-status { grid-column: 1 / -1; font-size: 13px; min-height: 18px; }
+#pickle-status.err { color: #c0392b; }
+#pickle-status.ok { color: #2e7d32; }
+#pickle-status.info { color: #555; }
+
+/* ===== Thông báo nổi ===== */
+#pickle-toast {
+  position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
+  z-index: 2147483647; max-width: 90vw; padding: 12px 20px; border-radius: 10px;
+  font: 600 14px system-ui, Arial, sans-serif; color: #fff;
+  box-shadow: rgba(0, 0, 0, 0.25) 0 8px 24px; transition: opacity 0.35s ease; pointer-events: none;
+}
+#pickle-toast.ok { background: #2e7d32; }
+#pickle-toast.err { background: #c0392b; }
+#pickle-toast.info { background: #444; }
+
+/* ===== Widget luồng tự động (góc trái dưới) ===== */
+#pickle-auto-fab {
+  position: fixed; left: 20px; bottom: 390px; z-index: 2147483645;
+  padding: 10px 14px; border: none; border-radius: 10px;
+  background: #4a4a4a; color: #fff; font: 600 13px system-ui, Arial, sans-serif;
+  cursor: pointer; box-shadow: rgba(0,0,0,.3) 0 6px 18px; white-space: nowrap;
+}
+#pickle-auto-fab.on { background: #d01a2c; box-shadow: rgba(208,26,44,.45) 0 6px 18px; }
+#pickle-auto-fab:hover { filter: brightness(1.1); }
+#pickle-auto-panel {
+  position: fixed; left: 20px; bottom: 438px; z-index: 2147483646;
+  width: 320px; background: #fff; border-radius: 12px; padding: 14px 16px;
+  box-shadow: rgba(0,0,0,.28) 0 14px 40px; color: #222; font: 13px system-ui, Arial, sans-serif;
+}
+#pickle-auto-panel .pickle-ap-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; font-size: 14px; }
+#pickle-auto-panel .pickle-ap-close { border: none; background: transparent; font-size: 20px; cursor: pointer; color: #888; line-height: 1; }
+#pickle-auto-panel .pickle-ap-switch { display: flex; align-items: center; gap: 8px; font-weight: 700; margin-bottom: 10px; cursor: pointer; }
+#pickle-auto-panel .pickle-ap-switch input { width: 18px; height: 18px; }
+#pickle-auto-panel .pickle-ap-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+#pickle-auto-panel .pickle-ap-row > span { width: 62px; font-weight: 600; color: #444; }
+#pickle-auto-panel input[type=time], #pickle-auto-panel select { flex: 1; padding: 6px 8px; border: 2px solid #ddd; border-radius: 8px; font: 13px system-ui, Arial, sans-serif; background: #fff; color: #222; }
+#pickle-auto-panel .pickle-ap-hint { font-size: 11px; color: #777; margin: 4px 0 10px; }
+#pickle-auto-panel .pickle-ap-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+#pickle-auto-panel .pickle-ap-actions button { padding: 8px 12px; border: none; border-radius: 8px; font: 700 12px system-ui, Arial, sans-serif; cursor: pointer; }
+#pickle-auto-panel .pickle-ap-save { background: #d01a2c; color: #fff; }
+#pickle-auto-panel .pickle-ap-run { background: #2e7d32; color: #fff; }
+#pickle-auto-panel .pickle-ap-run:disabled { opacity: .5; cursor: not-allowed; }
+#pickle-auto-panel .pickle-ap-more { background: #eef2f7; color: #333; }
+#pickle-auto-panel .pickle-ap-status { margin-top: 10px; font-size: 12px; padding: 8px 10px; border-radius: 8px; background: #f3f3f3; color: #555; white-space: pre-wrap; }
+#pickle-auto-panel .pickle-ap-status.ok { background: #eef7ee; color: #2e7d32; }
+#pickle-auto-panel .pickle-ap-status.err { background: #fdecea; color: #c0392b; }
+
+/* ===== Dropdown chọn màu trong từng item ===== */
+.pickle-item-color {
+  flex: 0 0 auto; padding: 7px 8px; border: 2px solid #ddd; border-radius: 8px;
+  font: 600 12.5px system-ui, Arial, sans-serif; background: #fff; color: #333; cursor: pointer;
+}
+.pickle-item-color:focus { border-color: #d01a2c; outline: none; }

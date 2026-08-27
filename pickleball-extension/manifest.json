@@ -1,0 +1,40 @@
+{
+  "manifest_version": 3,
+  "name": "Móc Khoá Pickleball 3D - Tạo Mockup & Design",
+  "version": "1.0.0",
+  "description": "Tạo Mockup + Design cho đơn Móc Khoá Pickleball 3D trên cendo.work: lấy tên từ External note, chọn mẫu theo Màu của item (7 màu, nhận cả 2 sản phẩm Clicky Pickleball & Pickleball Bóng Xoay Tròn), tự điền vào ô Upload. Có luồng tự động theo lịch + báo Lark.",
+  "icons": {
+    "128": "assets/icon128.png"
+  },
+  "permissions": ["alarms", "storage", "tabs"],
+  "host_permissions": [
+    "https://cendo.work/*",
+    "https://content.pancake.vn/*",
+    "https://open.larksuite.com/*"
+  ],
+  "background": { "service_worker": "bg.js" },
+  "options_page": "options.html",
+  "action": { "default_title": "Móc Khoá Pickleball 3D – Cài đặt luồng tự động" },
+  "content_scripts": [
+    {
+      "matches": ["https://cendo.work/*"],
+      "js": ["injected.js"],
+      "run_at": "document_start",
+      "world": "MAIN"
+    },
+    {
+      "matches": ["https://cendo.work/*"],
+      "js": ["content.js", "auto.js"],
+      "css": ["ui.css"],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "assets/*"
+      ],
+      "matches": ["https://cendo.work/*"]
+    }
+  ]
+}
