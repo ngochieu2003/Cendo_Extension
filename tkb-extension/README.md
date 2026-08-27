@@ -5,9 +5,9 @@ trong đơn, tự lấy **tên khách ở External note** (dòng thứ n → ite
 **mẫu bảng theo mục “Thiết kế”** của từng item, ghép thành **Mockup (1254×1254)** +
 **Design (1254×1254)** rồi **tự điền vào ô Upload** của đúng từng item.
 
-3 mẫu bảng: **Cấp 1 Cơ Bản** · **Cấp 1 Thỏ Hồng** · **Cấp 1 Vũ Trụ**.
+4 mẫu bảng: **Cấp 1 Cơ Bản** · **Cấp 1 Thỏ Hồng** · **Cấp 1 Vũ Trụ** · **Cấp 1 Kuromi**.
 Chữ trên mockup dùng font **Lobster** (có viền theo màu từng bảng); file Design là nền trắng,
-chữ đen **Arial Bold** canh giữa (cả 3 mẫu dùng chung 1 kiểu Design).
+chữ đen **Arial Bold** canh giữa (cả 4 mẫu dùng chung 1 kiểu Design).
 
 ## Cài đặt (Chrome / Edge / Cốc Cốc)
 1. Mở `chrome://extensions`
@@ -19,7 +19,7 @@ chữ đen **Arial Bold** canh giữa (cả 3 mẫu dùng chung 1 kiểu Design)
 
 ## Cách dùng
 1. Bấm **🗓 Tạo Mockup Thời Khoá Biểu**.
-2. Popup liệt kê từng item: mẫu bảng đã nhận (đổi bằng 3 nút Cơ Bản / Thỏ Hồng / Vũ Trụ nếu sai)
+2. Popup liệt kê từng item: mẫu bảng đã nhận (đổi bằng 4 nút Cơ Bản / Thỏ Hồng / Vũ Trụ / Kuromi nếu sai)
    và ô tên đã điền sẵn theo dòng tương ứng của External note.
 3. Bấm vào 1 item để xem preview của item đó; sửa tên / cỡ chữ / vị trí nếu cần
    (kéo thẳng trên ảnh preview, lăn chuột để đổi cỡ chữ). Mỗi item nhớ chỉnh riêng.
@@ -39,15 +39,16 @@ const TPL = {
   coban:   { size: 53, stroke: 6, baseY: 977,  cx: 627, maxW: 640, ink: "#1240c2" },
   thohong: { size: 47, stroke: 5, baseY: 1000, cx: 627, maxW: 700, ink: "#f86a99" },
   vutru:   { size: 47, stroke: 5, baseY: 960,  cx: 627, maxW: 700, ink: "#093283" },
+  kuromi:  { size: 46, stroke: 4, baseY: 933,  cx: 612, maxW: 430, ink: "#7b5bb5" },
 };
 ```
 
 - `size` cỡ chữ · `stroke` độ dày viền · `baseY` đường chân chữ · `cx` tâm ngang ·
   `maxW` bề ngang tối đa (tên dài hơn tự thu nhỏ) · `ink` màu viền.
-- Các con số đo trực tiếp từ 3 ảnh mockup mẫu (khung 1254×1254), sai lệch so với mẫu ≤ 3 px.
+- Các con số đo trực tiếp từ các ảnh mockup mẫu (khung 1254×1254), sai lệch so với mẫu ≤ 3 px.
 - File Design: sửa khối `DESIGN` (1254×1254, nền trắng, chữ đen, cỡ 102, baseline y = 646).
 
-Ảnh nền 3 mẫu nằm trong `assets/` (bản chưa có tên).
+Ảnh nền 4 mẫu nằm trong `assets/` (bản chưa có tên; riêng Kuromi được xoá tên mẫu "Lâm Bảo Nhi" khỏi ảnh sản phẩm gốc).
 
 ## Ghi chú kỹ thuật
 - Tên khách = mỗi **dòng có nội dung** của External note là 1 tên; tự bỏ nhãn “Tên:” nếu có.
@@ -55,7 +56,7 @@ const TPL = {
   “Thời khoá biểu”/“TKB”, đọc `SKU ID:` và `Thiết kế: …`.
 - Mẫu bảng: dò từ khoá *cơ bản / thỏ hồng / vũ trụ* trong mục “Thiết kế” (không phân biệt hoa thường,
   có dấu hay không); dự phòng theo fulfillment SKU `P-3D-TKB-01-N` (cơ bản) · `-TKB-VT-` (vũ trụ) ·
-  `-TKB-TH-` (thỏ hồng). Nhận sai thì bấm chọn tay trong popup.
+  `-TKB-TH-` (thỏ hồng) · `-TKB-KR-`/chữ `kuromi` (Kuromi — cập nhật lại nếu mã thật khác). Nhận sai thì bấm chọn tay trong popup.
 - Auto-fill (**v1.1.0 — cơ chế lấy theo userscript "Cendo → Raccoonie v9.8"** đã chạy ổn
   trong sản xuất trên chính trang này). `injected.js` chạy ở **MAIN world**, điền
   **tuần tự từng ô**, mỗi ô:

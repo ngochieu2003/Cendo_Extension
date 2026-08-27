@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Thời Khoá Biểu 3D - Tạo Mockup & Design",
-  "version": "1.1.2",
+  "version": "1.2.0",
   "description": "Tạo Mockup + Design cho đơn Thời khoá biểu 3D trên cendo.work: lấy tên từ External note, chọn mẫu theo mục Thiết kế, tự điền vào ô Upload. Có luồng tự động theo lịch + báo Lark.",
   "icons": {
     "128": "assets/icon128.png"
@@ -35,6 +35,7 @@
         "assets/tkb-coban.jpg",
         "assets/tkb-thohong.jpg",
         "assets/tkb-vutru.jpg",
+        "assets/tkb-kuromi.jpg",
         "assets/Lobster-Regular.ttf"
       ],
       "matches": ["https://cendo.work/*"]

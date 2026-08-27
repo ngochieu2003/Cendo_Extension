@@ -41,8 +41,13 @@
       size: 47, stroke: 5, baseY: 960, cx: 627, maxW: 700,
       fill: "#ffffff", ink: "#093283", shadow: "rgba(3,18,56,0.40)", shadowBlur: 7,
     },
+    kuromi: {
+      key: "kuromi", label: "Cấp 1 Kuromi", img: "assets/tkb-kuromi.jpg",
+      size: 46, stroke: 4, baseY: 933, cx: 612, maxW: 430,
+      fill: "#ffffff", ink: "#7b5bb5", shadow: "rgba(90,60,140,0.35)", shadowBlur: 6,
+    },
   };
-  const TPL_ORDER = ["coban", "thohong", "vutru"];
+  const TPL_ORDER = ["coban", "thohong", "vutru", "kuromi"];
 
   /* --------------------------- File Design --------------------------- */
   const DESIGN = {
@@ -144,15 +149,19 @@
   const noAccent = (s) => String(s || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/đ/g, "d").replace(/Đ/g, "D").toLowerCase();
   function designFromText(s) {
     const t = noAccent(s);
+    if (/kuromi/.test(t)) return "kuromi";
     if (/tho\s*hong/.test(t)) return "thohong";
     if (/vu\s*tru/.test(t)) return "vutru";
     if (/co\s*ban/.test(t)) return "coban";
     return null;
   }
   // Fulfillment SKU: P-3D-TKB-01-N (cơ bản) · P-3D-TKB-VT-01-N (vũ trụ) · P-3D-TKB-TH-01-N (thỏ hồng)
+  // Kuromi: đoán mã -KR-/-KRM- hoặc chữ kuromi (chưa có mã thật thì nhận qua chữ "Thiết kế")
   function designFromSku(s) {
     const t = noAccent(s);
+    if (/kuromi/.test(t)) return "kuromi";
     if (!/tkb/.test(t)) return null;
+    if (/tkb-kr/.test(t)) return "kuromi";
     if (/tkb-vt/.test(t)) return "vutru";
     if (/tkb-th/.test(t)) return "thohong";
     if (/tkb-\d/.test(t)) return "coban";
