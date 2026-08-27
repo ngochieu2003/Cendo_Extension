@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Extension Hub - Gom nút nổi vào 1 box (Cendo)
 // @namespace    https://local.hub
-// @version      3.1
+// @version      3.2
 // @description  Gom các nút nổi của extension ở góc dưới phải/trái Cendo vào 1 box thu gọn, chia nhóm theo từng extension.
 // @match        *://cendo.work/*
 // @match        *://*.cendo.work/*
@@ -46,6 +46,13 @@
       ],
     },
     {
+      title: 'Chú Cừu 3D',
+      ids: [
+        'cuu-open-btn',     // 🐑 Tạo Mockup Móc Khoá Clicky Chú Cừu
+        'cuu-auto-fab',     // 🐑 Auto Cừu: TẮT
+      ],
+    },
+    {
       title: 'Thời Khoá Biểu',
       ids: [
         'tkb-open-btn',     // 📅 Tạo Mockup Thời Khoá Biểu
@@ -68,6 +75,7 @@
   const START_OPEN  = false;  // true = mở sẵn box khi tải trang
   const FAB_LABEL   = '☰';    // biểu tượng nút bật/tắt
   const SHOW_BADGE  = true;   // hiện số nút đã gom được trên nút tròn
+  const WARN_MISSING = true;  // in ra Console id của nút nổi chưa được gom (để thêm extension mới)
   /* ================================== */
 
   const NS = 'exthub';
@@ -230,6 +238,27 @@
       badge.textContent = String(total);
       badge.style.display = total ? 'block' : 'none';
     }
+
+    if (WARN_MISSING) reportMissing();
+  }
+
+  // ---------- Báo nút nổi chưa gom ----------
+  // Mỗi khi cài thêm extension mới, mở Console (F12) sẽ thấy ngay id cần thêm vào GROUPS.
+  const warned = new Set();
+  function reportMissing() {
+    document.querySelectorAll('body > [id]').forEach((el) => {
+      const id = el.id;
+      if (!id || id.startsWith(NS) || slots[id] || warned.has(id)) return;
+      const pos = getComputedStyle(el).position;
+      if (pos !== 'fixed' && pos !== 'sticky') return;
+      if (!el.offsetWidth && !el.offsetHeight) return; // đang ẩn (panel cấu hình) -> bỏ qua
+      warned.add(id);
+      console.info(
+        '[Extension Hub] Nút nổi chưa gom: #' + id +
+        ' — "' + (el.textContent || '').trim().slice(0, 45) + '"' +
+        ' → thêm id này vào GROUPS trong Gom_Extension.js', el
+      );
+    });
   }
 
   collect();
